@@ -1,0 +1,73 @@
+/* Estilo básico do corpo */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #222222;
+  color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Cabeçalho */
+header {
+  text-align: center;
+  margin-top: 20px;
+  color: #f0f0f0;
+}
+
+/* Estilo da caixa de busca */
+#search-container {
+  text-align: center;
+  margin: 20px;
+}
+
+#search-container input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  width: 250px;
+  margin-right: 10px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #333333;
+  color: #f0f0f0;
+}
+
+#search-container button {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#search-container button:hover {
+  background-color: #45a049;
+}
+
+/* Formatação do mapa */
+#map {
+  height: 600px;
+  width: 80%;
+  margin: 0 auto;
+  border: 5px solid #444;
+}
+
+/* Container do mapa */
+#map-container {
+  margin: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 800px) {
+  #map {
+      height: 300px;
+  }
+}
+
+/* Estilos para imagens no popup */
+.leaflet-popup-content img {
+    border-radius: 8px;
+    margin-top: 10px;
+    max-width: 100%;
+}

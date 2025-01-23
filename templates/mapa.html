@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Espécies</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Observações de Espécie</h1>
+    </header>
+
+    <section id="search-container">
+        <form method="POST">
+            <input type="text" id="especie" name="especie" placeholder="Digite o nome da espécie" required>
+            <button type="submit">Consultar</button>
+        </form>
+    </section>
+
+    <section id="map-container">
+        <div id="map" style="height: 500px;"></div>
+    </section>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Configuração inicial do mapa
+        var map = L.map('map').setView([0, 0], 2);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Adiciona os marcadores baseados nas observações fornecidas pelo backend
+        {% for obs in observacoes %}
+            var lat = {{ obs.lat }};
+            var lon = {{ obs.lon }};
+            var preferred_common_name = "{{ obs.preferred_common_name }}";
+            var id = "{{ obs.id }}";
+            var scientific_name = "{{ obs.scientific_name }}";
+            var place_guess = "{{ obs.place_guess }}";
+            var medium_url = "{{ obs.medium_url }}";
+            var wikipedia_url = "{{ obs.wikipedia_url }}";
+
+            // Conteúdo do popup
+            var popupContent = "<b>Nome Comum:</b> " + preferred_common_name +
+                               "<br><b>Nome Científico:</b> <a href='" + wikipedia_url + "' target='_blank'>" + scientific_name + "</a>" +
+                               "<br><b>Localização:</b> " + place_guess +
+                               "<br><b>ID da Observação:</b> <a href='https://www.inaturalist.org/observations/" + id + "' target='_blank'>" + id + "</a>";
+
+            // Adiciona a imagem se disponível
+            if (medium_url !== 'Imagem não encontrada') {
+                popupContent += "<br><a href='" + medium_url + "' target='_blank'><img src='" + medium_url + "' alt='" + preferred_common_name + "' style='width: 100px; height: 100px; margin-top: 10px;'></a>";
+            }
+
+            // Adiciona o marcador no mapa se a latitude e longitude forem válidas
+            if (lat && lon) {
+                L.marker([lat, lon]).addTo(map)
+                    .bindPopup(popupContent)
+                    .openPopup();
+            }
+        {% endfor %}
+    </script>
+</body>
+
+</html>
