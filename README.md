@@ -1,22 +1,42 @@
-Densidade Demográfica - iNaturalist
-Este projeto utiliza a API do iNaturalist para buscar observações de espécies e exibir essas informações em um mapa interativo. O objetivo é permitir a pesquisa por espécies, visualizar suas observações e mostrar detalhes, como localização, foto e link para a Wikipedia.
+Aqui está o README formatado para o GitHub:
 
-Funcionalidades
-Pesquisa de espécies através da API do iNaturalist.
-Exibição de observações com informações detalhadas: nome comum e científico, localização (latitude e longitude), foto (se disponível), descrição e link para Wikipedia.
-Exibição das observações em um mapa interativo.
-Tecnologias Utilizadas
-Flask: Framework Python para o desenvolvimento da aplicação web.
-Waitress: Servidor WSGI para rodar a aplicação em produção.
-iNaturalist API: API externa para buscar observações de espécies.
-HTML/CSS/JavaScript: Para o front-end e exibição do mapa.
-Instalação
-1. Clonar o Repositório
-Clone este repositório para a sua máquina:
-
-bash
+markdown
 Copiar
 Editar
+# Densidade Demográfica - iNaturalist
+
+Este projeto utiliza a API do iNaturalist para buscar observações de espécies e exibir essas informações em um mapa interativo. O objetivo é permitir a pesquisa por espécies, visualizar suas observações e mostrar detalhes, como localização, foto e link para a Wikipedia.
+
+---
+
+## Funcionalidades
+
+- **Pesquisa de espécies** através da API do iNaturalist.  
+- **Exibição de observações** com informações detalhadas:  
+  - Nome comum e científico  
+  - Localização (latitude e longitude)  
+  - Foto (se disponível)  
+  - Descrição e link para Wikipedia  
+- **Mapa interativo** para visualização das observações.
+
+---
+
+## Tecnologias Utilizadas
+
+- **Flask**: Framework Python para o desenvolvimento da aplicação web.  
+- **Waitress**: Servidor WSGI para rodar a aplicação em produção.  
+- **iNaturalist API**: API externa para buscar observações de espécies.  
+- **HTML/CSS/JavaScript**: Para o front-end e exibição do mapa.
+
+---
+
+## Instalação
+
+### 1. Clonar o Repositório
+
+Clone este repositório para a sua máquina:
+
+```bash
 git clone https://github.com/seu-usuario/densidade-demografica.git
 cd densidade-demografica
 2. Criar e Ativar o Ambiente Virtual
@@ -57,7 +77,7 @@ Copiar
 Editar
 http://localhost:8080
 Estrutura do Projeto
-csharp
+plaintext
 Copiar
 Editar
 .
@@ -69,9 +89,25 @@ Editar
     └── styles.css        # Estilo do front-end
 Contribuições
 Fork o projeto.
-Crie uma branch para a sua feature (git checkout -b feature/nova-feature).
-Comite suas mudanças (git commit -am 'Adicionando nova feature').
-Push na branch (git push origin feature/nova-feature).
+Crie uma branch para a sua feature:
+bash
+Copiar
+Editar
+git checkout -b feature/nova-feature
+Comite suas mudanças:
+bash
+Copiar
+Editar
+git commit -am 'Adicionando nova feature'
+Push na branch:
+bash
+Copiar
+Editar
+git push origin feature/nova-feature
 Abra um Pull Request.
 Licença
-Este projeto está licenciado sob a MIT License - veja o arquivo LICENSE para mais detalhes.
+Este projeto está licenciado sob a MIT License. Veja o arquivo LICENSE para mais detalhes.
+
+css
+Copiar
+Editar
