@@ -1,8 +1,7 @@
 # Importa as bibliotecas necessárias
 from flask import Flask, render_template, request  # Flask para criar a aplicação web, render_template para renderizar HTML e request para capturar dados da requisição
 import requests  # Usado para realizar requisições HTTP
-from waitress import serve # Usado para iniciar o servidor
-
+from waitress import serve  # Usado para iniciar o servidor
 
 # Instancia a aplicação Flask
 app = Flask(__name__)
@@ -48,28 +47,26 @@ def index():
 
                             # Tenta acessar a foto da observação, se disponível
                             default_photo = obs.get('taxon', {}).get('default_photo', None)
-                            print("\nDefault photo:")  # Depuração: imprime informações sobre a foto
-                            print(default_photo)  # Mostra o conteúdo de 'default_photo'
-
-                            # Se houver uma foto válida, obtém a URL da imagem em tamanho médio
                             if default_photo and isinstance(default_photo, dict):
                                 medium_url = default_photo.get('medium_url', 'Imagem não encontrada')
                             else:
                                 medium_url = 'Imagem não encontrada'
 
-                            print("\nDados extraídos:")  # Depuração: indica que os dados foram extraídos
-                            print(f"URL da imagem: {medium_url}")  # Depuração: exibe a URL da imagem
+                            # Inicializa latitude e longitude como None por padrão
+                            lat, lon = None, None
 
                             # Processa a localização (latitude e longitude) da observação
                             if isinstance(location, str):
-                                lat, lon = location.split(',') if ',' in location else (None, None)  # Separa latitude e longitude
-                                lat, lon = float(lat) if lat else None, float(lon) if lon else None  # Converte para float
+                                if ',' in location:
+                                    lat, lon = location.split(',')
+                                    lat = float(lat) if lat else None
+                                    lon = float(lon) if lon else None
                             elif isinstance(location, dict):  # Caso a localização seja um dicionário
                                 lat = location.get('latitude')
                                 lon = location.get('longitude')
 
-                            # Adiciona a observação à lista se a localização for válida
-                            if lat and lon:
+                            # Garante que a observação só seja adicionada se a localização for válida
+                            if lat is not None and lon is not None:
                                 observacoes.append({
                                     'id': observation_id,
                                     'preferred_common_name': preferred_common_name,
@@ -94,4 +91,3 @@ def index():
 # Executa a aplicação em produção
 if __name__ == '__main__':
     serve(app, host='0.0.0.0', port=8080)
-
