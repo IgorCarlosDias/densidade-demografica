@@ -39,31 +39,22 @@ Crie e ative o ambiente virtual para o projeto:
 
 No Windows:
 
-bash
-Copiar
-Editar
 python -m venv venv
 .\venv\Scripts\activate
 No macOS/Linux:
 
-bash
-Copiar
-Editar
+
 python3 -m venv venv
 source venv/bin/activate
 3. Instalar as Dependências
 Instale as dependências necessárias usando pip:
 
-bash
-Copiar
-Editar
+
 pip install -r requirements.txt
 4. Rodar a Aplicação
 Para rodar a aplicação, execute o seguinte comando:
 
-bash
-Copiar
-Editar
+
 python app.py
 O servidor será iniciado na porta 8080. Você pode acessar a aplicação no navegador através de:
 
@@ -85,18 +76,12 @@ Editar
 Contribuições
 Fork o projeto.
 Crie uma branch para a sua feature:
-bash
-Copiar
-Editar
+
 git checkout -b feature/nova-feature
 Comite suas mudanças:
-bash
-Copiar
-Editar
+
 git commit -am 'Adicionando nova feature'
 Push na branch:
-bash
-Copiar
-Editar
+
 git push origin feature/nova-feature
 Abra um Pull Request.
