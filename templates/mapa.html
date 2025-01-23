@@ -10,20 +10,29 @@
 </head>
 
 <body>
-    <header>
-        <h1>Observações de Espécie</h1>
-    </header>
+    <div class="content-wrapper">
+        <header>
+            <h1>Observações de Espécie</h1>
+            <p>Consulte as espécies observadas em diversos locais do mundo.</p>
+        </header>
 
-    <section id="search-container">
-        <form method="POST">
-            <input type="text" id="especie" name="especie" placeholder="Digite o nome da espécie" required>
-            <button type="submit">Consultar</button>
-        </form>
-    </section>
+        <section id="search-container">
+            <form method="POST">
+                <input type="text" id="especie" name="especie" placeholder="Digite o nome da espécie" required>
+                <button type="submit">Consultar</button>
+            </form>
+        </section>
 
-    <section id="map-container">
-        <div id="map" style="height: 500px;"></div>
-    </section>
+        <section id="map-container">
+            <div id="map" style="height: 500px;"></div>
+        </section>
+    </div>
+
+    <footer>
+        <p>
+            Desenvolvido por <a href="https://github.com/IgorCarlosDias" target="_blank">Igor Carlos Dias</a>
+        </p>
+    </footer>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
@@ -65,5 +74,4 @@
         {% endfor %}
     </script>
 </body>
-
 </html>
