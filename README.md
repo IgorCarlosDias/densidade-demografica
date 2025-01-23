@@ -1,8 +1,3 @@
-Aqui está o README formatado para o GitHub:
-
-markdown
-Copiar
-Editar
 # Densidade Demográfica - iNaturalist
 
 Este projeto utiliza a API do iNaturalist para buscar observações de espécies e exibir essas informações em um mapa interativo. O objetivo é permitir a pesquisa por espécies, visualizar suas observações e mostrar detalhes, como localização, foto e link para a Wikipedia.
