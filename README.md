@@ -59,8 +59,6 @@ python app.py
 O servidor será iniciado na porta 8080. Você pode acessar a aplicação no navegador através de:
 
 arduino
-Copiar
-Editar
 http://localhost:8080
 Estrutura do Projeto
 plaintext
