@@ -60,10 +60,8 @@ O servidor será iniciado na porta 8080. Você pode acessar a aplicação no nav
 
 arduino
 http://localhost:8080
+
 Estrutura do Projeto
-plaintext
-Copiar
-Editar
 .
 ├── app.py                # Arquivo principal da aplicação Flask
 ├── requirements.txt      # Dependências do projeto
