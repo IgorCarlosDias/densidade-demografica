@@ -1,8 +1,14 @@
+import os
 from flask import Flask, request, jsonify, render_template
 import requests
 from mangum import Mangum
 
-app = Flask(__name__)
+# Corrige os caminhos de templates e static para serverless / subpasta api
+app = Flask(
+    __name__,
+    template_folder=os.path.join(os.path.dirname(__file__), '..', 'templates'),
+    static_folder=os.path.join(os.path.dirname(__file__), '..', 'static')
+)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -45,4 +51,5 @@ def index():
 
     return render_template("mapa.html", observacoes=observacoes, especie=especie)
 
+# Handler necessário para Vercel serverless
 handler = Mangum(app)
