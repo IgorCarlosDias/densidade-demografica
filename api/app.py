@@ -1,12 +1,25 @@
-from flask import Flask, request, jsonify, render_template
+import os
+from fastapi import FastAPI, Form, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 import requests
-from mangum import Mangum
+from fastapi.staticfiles import StaticFiles
 
-app = Flask(__name__)
+# Define diretório base
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-@app.route("/", methods=["GET", "POST"])
-def index():
-    especie = request.form.get("especie") if request.method == "POST" else request.args.get("especie")
+# Cria app
+app = FastAPI()
+
+# Configura templates
+templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
+
+# Monta static
+app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static")
+
+@app.get("/", response_class=HTMLResponse)
+@app.post("/", response_class=HTMLResponse)
+async def index(request: Request, especie: str = Form(None))
     observacoes = []
 
     if especie:
@@ -23,14 +36,14 @@ def index():
                 place_guess = obs.get("place_guess", "Localização desconhecida")
                 wikipedia_url = obs.get("taxon", {}).get("wikipedia_url", "Link não cadastrado")
                 medium_url = obs.get("taxon", {}).get("default_photo", {}).get("medium_url", "Imagem não encontrada")
-                
+
                 lat, lon = None, None
                 if isinstance(location, str) and "," in location:
                     lat, lon = map(float, location.split(","))
                 elif isinstance(location, dict):
                     lat = location.get("latitude")
                     lon = location.get("longitude")
-                
+
                 if lat is not None and lon is not None:
                     observacoes.append({
                         "id": observation_id,
@@ -43,6 +56,4 @@ def index():
                         "wikipedia_url": wikipedia_url
                     })
 
-    return render_template("mapa.html", observacoes=observacoes, especie=especie)
-
-handler = Mangum(app)
+    return templates.TemplateResponse("mapa.html", {"request": request, "observacoes": observacoes, "especie": especie})
