@@ -19,7 +19,7 @@ app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), na
 
 @app.get("/", response_class=HTMLResponse)
 @app.post("/", response_class=HTMLResponse)
-async def index(request: Request, especie: str = Form(None))
+async def index(request: Request, especie: str = Form(None)):
     observacoes = []
 
     if especie:
