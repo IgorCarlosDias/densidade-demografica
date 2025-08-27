@@ -2,19 +2,15 @@ import os
 from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-import requests
 from fastapi.staticfiles import StaticFiles
+import requests
 
-# Define diretório base
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Caminho base do projeto
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Cria app
-app = FastAPI()
-
-# Configura templates
+# Configura templates e static
 templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
-
-# Monta static
+app = FastAPI()
 app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static")
 
 @app.get("/", response_class=HTMLResponse)
@@ -56,4 +52,11 @@ async def index(request: Request, especie: str = Form(None)):
                         "wikipedia_url": wikipedia_url
                     })
 
-    return templates.TemplateResponse("mapa.html", {"request": request, "observacoes": observacoes, "especie": especie})
+    return templates.TemplateResponse(
+        "mapa.html",
+        {
+            "request": request,
+            "observacoes": observacoes,
+            "especie": especie
+        }
+    )
