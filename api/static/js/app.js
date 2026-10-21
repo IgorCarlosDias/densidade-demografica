@@ -68,9 +68,33 @@
 
   /* ---------- Mapa ---------- */
   const map = L.map('map', { scrollWheelZoom: false, zoomControl: true }).setView([-14, -52], 3);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap &copy; CARTO', subdomains: 'abcd', maxZoom: 19,
-  }).addTo(map);
+
+  // Provedores 100% livres e sem exigência de API Key
+  const esriTopo = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community',
+    maxZoom: 18,
+  });
+
+  const esriSatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+    maxZoom: 18,
+  });
+
+  const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19,
+  });
+
+  // Camada padrão ativa: Topográfico (foco em relevo e bioma)
+  esriTopo.addTo(map);
+
+  // Seletor de visualização (Topográfico, Satélite e OpenStreetMap)
+  L.control.layers({
+    '🌿 Relevo & Bioma': esriTopo,
+    '🛰️ Satélite': esriSatellite,
+    '🗺️ OpenStreetMap': osm,
+  }, null, { position: 'topright' }).addTo(map);
+
   map.on('click', () => map.scrollWheelZoom.enable());
 
   const cluster = L.markerClusterGroup({
